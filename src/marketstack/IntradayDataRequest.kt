@@ -1,6 +1,11 @@
 package com.gme.marketstack
 
-import io.ktor.http.*
+import io.ktor.http.Parameters
+import io.ktor.http.ParametersBuilder
+import java.time.Duration
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 /**
  * Market Stack request for the intraday API. This data class represents the
@@ -76,7 +81,7 @@ data class IntradayDataRequest(
 
   fun path() = "v1/intraday"
 
-  fun toParameters() : Parameters {
+  fun toParameters(): Parameters {
     return ParametersBuilder()
       .apply {
         append("access_key", accessKey)
@@ -93,4 +98,29 @@ data class IntradayDataRequest(
       .build()
   }
 
+  companion object {
+    private const val DATE_FORMAT = "yyyy-MM-dd hh:mm:ss"
+    private val DATE_RANGE = Duration.ofDays(4)
+    private const val INTERVAL = "1hour"
+    private const val LIMIT = 1_000
+    private const val SORT_ORDER = "DESC"
+
+    fun buildRequest(accessKey: String): IntradayDataRequest {
+      val formatter = DateTimeFormatter
+        .ofPattern(DATE_FORMAT)
+        .withZone(ZoneId.systemDefault())
+      val now = Instant.now()
+      val before = now.minus(DATE_RANGE)
+
+      return IntradayDataRequest(
+        accessKey = accessKey,
+        symbols = MarketStackFetcher.THE_SYMBOL,
+        interval = INTERVAL,
+        sort = SORT_ORDER,
+        dateFrom = formatter.format(before),
+        dateTo = formatter.format(now),
+        limit = LIMIT
+      )
+    }
+  }
 }
