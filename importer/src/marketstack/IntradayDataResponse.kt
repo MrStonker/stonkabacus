@@ -1,4 +1,4 @@
-package com.gme.marketstack
+package com.gme.importer.marketstack
 
 import java.util.Date
 

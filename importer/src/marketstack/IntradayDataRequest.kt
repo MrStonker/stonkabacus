@@ -1,4 +1,4 @@
-package com.gme.marketstack
+package com.gme.importer.marketstack
 
 import io.ktor.http.Parameters
 import io.ktor.http.ParametersBuilder
@@ -100,10 +100,11 @@ data class IntradayDataRequest(
 
   companion object {
     private const val DATE_FORMAT = "yyyy-MM-dd hh:mm:ss"
-    private val DATE_RANGE = Duration.ofDays(4)
     private const val INTERVAL = "1hour"
     private const val LIMIT = 1_000
     private const val SORT_ORDER = "DESC"
+
+    private val DATE_RANGE = Duration.ofDays(4)
 
     fun buildRequest(accessKey: String): IntradayDataRequest {
       val formatter = DateTimeFormatter

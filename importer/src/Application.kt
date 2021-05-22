@@ -1,7 +1,7 @@
-package com.gme
+package com.gme.importer
 
-import com.gme.marketstack.IntradayDataRequest
-import com.gme.marketstack.MarketStackFetcher
+import com.gme.importer.marketstack.IntradayDataRequest
+import com.gme.importer.marketstack.MarketStackFetcher
 import io.ktor.client.HttpClient
 import io.ktor.client.features.HttpTimeout
 import io.ktor.client.features.json.GsonSerializer

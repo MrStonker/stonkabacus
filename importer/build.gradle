@@ -5,7 +5,7 @@ buildscript {
             url "https://plugins.gradle.org/m2/"
         }
     }
-    
+
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath("org.jlleitschuh.gradle:ktlint-gradle:$klint_version")
@@ -16,9 +16,9 @@ apply plugin: 'kotlin'
 apply plugin: 'application'
 apply plugin: "org.jlleitschuh.gradle.ktlint"
 
-group 'com.gme'
+group 'com.gme.importer'
 version '0.0.2-SNAPSHOT'
-mainClassName = "com.gme.ApplicationKt"
+mainClassName = "com.gme.importer.ApplicationKt"
 
 sourceSets {
     main.kotlin.srcDirs = main.java.srcDirs = ['src']
@@ -27,12 +27,14 @@ sourceSets {
     test.resources.srcDirs = ['testresources']
 }
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
-// Add compatibility
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
